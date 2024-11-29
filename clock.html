@@ -14,16 +14,52 @@
 </head>
 
 <body>
-    <div class="center">
-        <h2></h2> 
+    <div class="bg-img">
+        <div class="center">
+            <div>
+                <h2 id="h">00</h2>
+                <p>Hours</p>
+            </div>
+            <div>
+                <h2 id="m">00</h2>
+                <p>Minutes</p>
+            </div>
+            <div>
+                <h2 id="s">00</h2>
+                <p>Seconds</p>
+            </div>
+            <p id="ampm">AM</p>
+        </div>
     </div>
     <script>
-        function getTime(){
-            let time = new Date().toLocaleTimeString();
-            document.querySelector("h2").innerHTML = time;
+        function updateTime() {
+
+            let h = new Date().getHours();
+            let m = new Date().getMinutes();
+            let s = new Date().getSeconds();
+            let ampm = "AM"
+
+            if (h > 12) {
+                h = h - 12
+                ampm = "PM"
+            }
+
+            (h < 10) ? h = "0" + h : h;
+            (m < 10) ? m = "0" + m : m;
+            (s < 10) ? s = "0" + s : s;
+
+            document.querySelector("#h").innerText = h;
+            document.querySelector("#m").innerText = m;
+            document.querySelector("#s").innerText = s;
+
+            document.querySelector("#ampm").innerText = ampm;
+
+            setTimeout(() => {
+                updateTime()
+            }, 1000)
         }
-        setInterval(getTime, 1000)
-        
+        updateTime()
+
     </script>
 </body>
 
